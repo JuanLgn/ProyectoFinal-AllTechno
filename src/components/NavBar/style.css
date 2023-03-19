@@ -10,7 +10,8 @@
     font-size: 30px;
     color:rgb(49, 11, 49);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    margin-top: 9px;
+    margin-top: 5px;
+    margin-left: 20px;
 }
 
 .logo:hover{
@@ -22,13 +23,14 @@
 .list{
     display: flex;
     flex-direction: row;
-    
+    margin-top: 10px;
 }
 
 .list li {
     margin-left: 20px;
     font-size: 20px;
-    list-style:none
+    list-style:none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 

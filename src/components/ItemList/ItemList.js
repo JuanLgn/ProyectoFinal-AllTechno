@@ -11,11 +11,10 @@ const ItemList = ({productList}) => {
           <Link to={`/item/${product.id}`}>
             <Item product={product}/>
           </Link>
-
         </div>
       ))}
     </div>
   );
 };
 
-export default ItemList
+export default ItemList;

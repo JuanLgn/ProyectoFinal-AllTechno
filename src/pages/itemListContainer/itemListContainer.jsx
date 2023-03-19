@@ -1,44 +1,49 @@
-import { products } from "../../data/products"
-import { useEffect, useState } from "react";
-import ItemList from "../../components/ItemList/ItemList";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import ItemList from '../../components/ItemList/ItemList';
+import { useParams } from 'react-router-dom';
+import {
+    getFirestore,
+    getDocs,
+    collection,
+    query,
+    where,
+} from 'firebase/firestore';
 
-const ItemListContainer = ({greeting}) => {
+const ItemListContainer = () => {
     const [productList, setProductList] = useState([]);
-    const { categoryId } = useParams()
-    console.log(categoryId)
+    const { categoryId } = useParams();
 
-    const getProducts = new Promise((resolve, reject) => {
-        if(categoryId){
-            const filteredProducts = products.filter(
-                (item) => item.category === categoryId
-                );
-            setTimeout(() => {
-                resolve(filteredProducts)
-            }, 1000); 
-        } else {
-            setTimeout(() => {
-                resolve(products)
-            }, 1000);
-        }
+    const getProducts = () => {
+    const db = getFirestore();
+    const queryBase = collection(db, 'products');
+    const querySnapshot = categoryId
+        ? query(queryBase, where('category', '==', categoryId))
+        : queryBase;
 
-    });
+    getDocs(querySnapshot)
+        .then((response) => {
+        const list = response.docs.map((doc) => {
+            console.log(doc);
+            return {
+            id: doc.id,
+            ...doc.data(),
+            };
+        });
+        setProductList(list);
+        console.log(list);
+        })
+        .catch((error) => console.log(error));
+    };
 
     useEffect(() => {
-        getProducts
-        .then((response) => {
-            setProductList(response)
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    getProducts();
     }, [categoryId]);
 
     return (
-        <div>
-            <ItemList productList={productList}/>
-        </div>
-    )
-}
+    <div>
+        <ItemList productList={productList} />
+    </div>
+    );
+};
 
-export default ItemListContainer
+export default ItemListContainer;

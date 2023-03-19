@@ -1,9 +1,31 @@
-.item{
+.itemList {
     display: flex;
-    align-items: center;
+    justify-content: left;
+}
+
+
+.item{
+    display: flex; 
+    justify-content: left;
     flex-direction: column;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 50px 0 rgb(20, 157, 211);
     border-radius: 5px;
     padding: 10px;
-    margin: 50px;
+    margin: 30px;
+}
+
+.titulo{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(5, 32, 63);
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.precio{
+    font-size: 20px;
+    text-align: center;
+}
+
+.imagen{
+    width: 50px;
 }
